@@ -26,20 +26,20 @@ public class ServletSeConnecter extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.getRequestDispatcher("WEB-INF/seconnecter.jsp").forward(request, response);
-		System.out.println("dogetS");
+		
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
-		System.out.println("dopost");
+		
 			String identifiant=request.getParameter("login");
 			String mdp = request.getParameter("mdp");
 			HttpSession session; 
 			Utilisateur u = null;
 			try {
-				System.out.println("try");
+				
 				UtilisateurManager.getInstance().seConnecter(identifiant, mdp);
 				session= request.getSession();
 				response.sendRedirect("http://google.fr");
@@ -49,7 +49,7 @@ public class ServletSeConnecter extends HttpServlet {
 				session.setAttribute("utilisateurActuel", u);
 				request.setAttribute("ListeCodesErreur", e.getListeCodesErreur());
 				request.getRequestDispatcher("/WEB-INF/Acceuil.jsp").forward(request, response);
-				System.out.println("catch");
+				
 				e.printStackTrace();
 				
 
