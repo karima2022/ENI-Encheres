@@ -1,17 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>	
-	
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>		
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Acceuil</title>
+<title>Accueil</title>
 </head>
 <body>
 	<%@ include file="Entete.html"%>
 
-	<a href="seConnecter">S'inscrire-Se connecter</a>
+	
+		<c:if test="${utilisateurActuel == null }">
+		<a href="seConnecter">S'inscrire-Se connecter</a>
+		</c:if>
+	
+	<c:if test="${utilisateurActuel != null }">
+		<a href="">Enchères</a>
+		<a href="">Vendre un article</a>
+		<a href="">Mon profil</a>
+		<a href="">Déconnexion</a>
+</c:if>
 
 	<h1>Liste des enchères</h1>
 
@@ -31,7 +41,7 @@
 	</p>
 	<button name="rechercher">Rechercher</button><br>
 
-<c:if test="${login != null }">
+<c:if test="${utilisateurActuel != null }">
 	<a>
 		<input type ="radio" name="achatVente">Achats
 	<div>
@@ -60,14 +70,15 @@
 </c:if>
 
 <ul >
-	<li><a href=""><c:out value="${nomArticle}"/></a></li>
+
+<li><a href=""><c:out value="${nomArticle}"/></a></li>
 	<li>prix :<c:out value="${prix }"/> points</li>
-	<li>Fin de l'enchere : <c:out value="${finEnchere}"/></li>
+	<li>Fin de l'enchere : <fmt:formatDate value="${finEnchere}" pattern="dd/MM/yyyy hh:mm"/></li>
 	<li>
 	<c:choose >
-		<c:when test="${login != null }">
-		<a href="${idVendeur}">vendeur: ${idVendeur} </a></c:when>
-		<c:otherwise>Vendeur : ${idVendeur} </c:otherwise>
+		<c:when test="${utilisateurActuel != null }">
+		vendeur:<a href="${pseudo}"> ${pseudo} </a></c:when> 
+		<c:otherwise>Vendeur : ${pseudo} </c:otherwise>
 	</c:choose>
 </li>
 </ul>

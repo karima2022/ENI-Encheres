@@ -17,7 +17,7 @@ import fr.eni.encheres.bo.Article;
  * Servlet implementation class ServletAcceuil
  */
 @WebServlet("/acceuil")
-public class ServletAcceuil extends HttpServlet {
+public class ServletAccueil extends HttpServlet {
 	private static final long serialVersionUID = 1L;
    
 
@@ -31,7 +31,7 @@ public class ServletAcceuil extends HttpServlet {
 			article = UtilisateurManager.getInstance().afficher();
 			request.setAttribute("nomArticle", article.getNom()); 
 			request.setAttribute("prix", article.getPrix()); 
-			request.setAttribute("finEnchere", article.getFinEncheres()); 
+			request.setAttribute("finEnchere", article.getFinEnchere()); 
 			request.setAttribute("vendeur", article.getIdVendeur()); 
 		} catch (BusinessException e) {
 			// TODO Auto-generated catch block
