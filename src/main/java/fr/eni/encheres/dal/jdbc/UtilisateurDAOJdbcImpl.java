@@ -103,6 +103,6 @@ public Utilisateur getUtilisateurByPseudo(String pseudo) throws BusinessExceptio
 
 @Override
 public void modifierProfil(Utilisateur utilisateur) throws BusinessException {
-	// TODO Auto-generated method stub
-	
+	// TODO Auto-generated method stub	
+}
 }
