@@ -8,6 +8,11 @@ public abstract class CodesResultatBLL {
 	
 
 public static final int IDENTIFIANT_KO = 20000;
+public static final int EMAIL_INVALID = 20001;
+
+
+
+public static final int PSEUDO_INVALID = 20002;
 }
 
 
