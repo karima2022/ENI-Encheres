@@ -20,7 +20,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			+ "  nom, prenom, email,telephone, rue, codePostal, ville, "
 			+ "motDePasse,credit,administrateur FROM UTILISATEURS WHERE email = ?;";
 
-	
+	//////////////////////LOGIN////////////////////////////////////////////////////
 	private Utilisateur getUtilisateurByLogin(String login,String requete) throws BusinessException {
 		Utilisateur u = null;
 		try (Connection cnx = ConnectionProvider.getConnection();
@@ -50,7 +50,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		}
 		return u;
 	}
-
+/////////////////////INSERT UTILISATEUR///////////////////////////////////////
 	private static final String INSERT_UTILISATEUR = "INSERT into UTILISATEURS ( pseudo,  nom,  prenom,  email,  telephone,  rue, codePostal,ville, motDePasse, credit, administrateur) values(?,?,?,?,?,?,?,?,?,?,?);";
 
 	@Override

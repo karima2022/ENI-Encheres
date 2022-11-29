@@ -30,7 +30,7 @@ public class UtilisateurManager {
 	
 	
 	
-	////////////////////////AJOUTER UTILISATEUR////////////////////////////////////////////
+	/////////////////////////AJOUTER UTILISATEUR////////////////////////////////////////////
 	public void ajouterUtilisateur(Utilisateur u) throws BusinessException {
 		BusinessException businessException = new BusinessException();
 		this.emailValidator(u.getEmail(), businessException);
