@@ -5,6 +5,7 @@ package fr.eni.encheres.dal;
  */
 public abstract class CodesResultatDAL {
 	public static final int SQL_EXCEPTION= 10000;
+	public static final int INSERT_UTILISATEUR_ECHEC=10001;
 }
 
 
