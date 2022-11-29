@@ -1,5 +1,6 @@
 package fr.eni.encheres.bo;
 
+import java.sql.Date;
 import java.time.LocalDateTime;
 
 public class Article {
@@ -119,6 +120,18 @@ public class Article {
 					int prix, int categorie, int idVendeur, int statut, Retrait retrait) {
 		this(nom, description, debutEnchere, finEnchere, prix, categorie, idVendeur, statut);
 		this.retrait = retrait;
+	}
+
+	public Article(String nom, String description, Date debutEnchere, Date finEnchere, int prix, int categorie, int idVendeur, int statut) {
+		super();
+		this.nom = nom;
+		this.description = description;
+		this.debutEnchere = LocalDateTime.parse((CharSequence) debutEnchere);
+		this.finEnchere = LocalDateTime.parse((CharSequence) finEnchere);
+		this.prix = prix;
+		this.categorie = categorie;
+		this.idVendeur = idVendeur;
+		this.statut = statut;
 	}
 	
 }
