@@ -47,7 +47,7 @@ public class ServletNouvelleVente extends HttpServlet {
 				}
 			}
 			
-			chargerArticle(request, articleManager);
+//			chargerArticle(request, articleManager);
 		}
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/pages/nouvelle_vente.jsp");
@@ -134,7 +134,7 @@ public class ServletNouvelleVente extends HttpServlet {
 		catch(NumberFormatException e)
 		{
 			e.printStackTrace();
-			listeCodesErreur.add(CodesResultat Servlets.FORMAT_ID_ARTICLE_ERREUR);
+//			listeCodesErreur.add(CodesResultat Servlets.FORMAT_ID_ARTICLE_ERREUR);
 		}
 		return id;
 	}
@@ -143,7 +143,7 @@ public class ServletNouvelleVente extends HttpServlet {
 		String nom;
 		nom = request.getParameter("nom");
 		if (nom == null || nom.trim().equals("")) {
-			listeCodesErreur.add(CodesResultatServlets.NOM_LISTE_OBLIGATOIRE);
+//			listeCodesErreur.add(CodesResultatServlets.NOM_LISTE_OBLIGATOIRE);
 		}
 		return nom;
 	}
@@ -152,7 +152,7 @@ public class ServletNouvelleVente extends HttpServlet {
 		String description;
 		description = request.getParameter("description");
 		if (description == null || description.trim().equals("")) {
-			listeCodesErreur.add(CodesResultatServlets.NOM_LISTE_OBLIGATOIRE);
+//			listeCodesErreur.add(CodesResultatServlets.NOM_LISTE_OBLIGATOIRE);
 		}
 		return description;
 	}
@@ -161,7 +161,7 @@ public class ServletNouvelleVente extends HttpServlet {
 		LocalDateTime debutEnchere;
 		debutEnchere = LocalDateTime.parse(request.getParameter("debutEnchere"));
 		if (debutEnchere == null) {
-			listeCodesErreur.add(CodesResultatServlets.NOM_LISTE_OBLIGATOIRE);
+//			listeCodesErreur.add(CodesResultatServlets.NOM_LISTE_OBLIGATOIRE);
 		}
 		return debutEnchere;
 	}
@@ -170,7 +170,7 @@ public class ServletNouvelleVente extends HttpServlet {
 		LocalDateTime finEnchere;
 		finEnchere = LocalDateTime.parse(request.getParameter("finEnchere"));
 		if (finEnchere == null) {
-			listeCodesErreur.add(CodesResultatServlets.NOM_LISTE_OBLIGATOIRE);
+//			listeCodesErreur.add(CodesResultatServlets.NOM_LISTE_OBLIGATOIRE);
 		}
 		return finEnchere;
 	}
@@ -184,7 +184,7 @@ public class ServletNouvelleVente extends HttpServlet {
 			}
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
-			listeCodesErreur.add(CodesResultatServlets.FORMAT_ID_ARTICLE_ERREUR);
+//			listeCodesErreur.add(CodesResultatServlets.FORMAT_ID_ARTICLE_ERREUR);
 		}
 		
 		return id;
@@ -194,7 +194,7 @@ public class ServletNouvelleVente extends HttpServlet {
 		String rue;
 		rue = request.getParameter("rue");
 		if (rue == null || rue.trim().equals("")) {
-			listeCodesErreur.add(CodesResultatServlets.NOM_LISTE_OBLIGATOIRE);
+//			listeCodesErreur.add(CodesResultatServlets.NOM_LISTE_OBLIGATOIRE);
 		}
 		return rue;
 	}
@@ -203,7 +203,7 @@ public class ServletNouvelleVente extends HttpServlet {
 		String codePostal;
 		codePostal = request.getParameter("codePostal");
 		if (codePostal == null || codePostal.trim().equals("")) {
-			listeCodesErreur.add(CodesResultatServlets.NOM_LISTE_OBLIGATOIRE);
+//			listeCodesErreur.add(CodesResultatServlets.NOM_LISTE_OBLIGATOIRE);
 		}
 		return codePostal;
 	}
@@ -212,7 +212,7 @@ public class ServletNouvelleVente extends HttpServlet {
 		String ville;
 		ville = request.getParameter("ville");
 		if (ville == null || ville.trim().equals("")) {
-			listeCodesErreur.add(CodesResultatServlets.NOM_LISTE_OBLIGATOIRE);
+//			listeCodesErreur.add(CodesResultatServlets.NOM_LISTE_OBLIGATOIRE);
 		}
 		return ville;
 	}
