@@ -1,11 +1,7 @@
 package fr.eni.encheres.servlet;
 
-import java.awt.Checkbox;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -22,7 +18,7 @@ import fr.eni.encheres.bo.Utilisateur;
 /**
  * Servlet implementation class SeConnecter
  */
-@WebServlet("/seConnecter")
+@WebServlet("/ServletSeConnecte")
 public class ServletSeConnecter extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -54,7 +50,7 @@ public class ServletSeConnecter extends HttpServlet {
 		if(ifLogin && ifMdp && ifCk) 
 		{
 			
-			request.getRequestDispatcher("WEB-INF/Acceuil.jsp").forward(request, response);
+			request.getRequestDispatcher("WEB-INF/Accueil.jsp").forward(request, response);
 		}
 		else {
 		request.getRequestDispatcher("WEB-INF/seconnecter.jsp").forward(request, response);
@@ -83,10 +79,10 @@ public class ServletSeConnecter extends HttpServlet {
 			user=UtilisateurManager.getInstance().seConnecter(identifiant, mdp);
 			
 			request.setAttribute("login", cookie.getValue());
-			request.getRequestDispatcher("/WEB-INF/Acceuil.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/Accueil.jsp").forward(request, response);
 			session = request.getSession();
 			session.setAttribute("utilisateurActuel", user);
-			response.sendRedirect("acceuil");
+			response.sendRedirect("/Accueil");
 			
 		} catch (BusinessException e) {
 			
