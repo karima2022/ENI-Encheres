@@ -18,7 +18,7 @@ import fr.eni.encheres.bo.Utilisateur;
 /**
  * Servlet implementation class SeConnecter
  */
-@WebServlet("/ServletSeConnecte")
+@WebServlet("/seConnecter")
 public class ServletSeConnecter extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

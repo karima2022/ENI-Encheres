@@ -14,7 +14,7 @@ import fr.eni.encheres.bo.Utilisateur;
 /**
  * Servlet implementation class ServletCreerUtilisateur
  */
-@WebServlet("/servletCreerUtilisateur")
+@WebServlet("/CreerUtilisateur")
 public class ServletCreerUtilisateur extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

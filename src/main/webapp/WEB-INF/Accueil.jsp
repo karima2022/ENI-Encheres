@@ -13,7 +13,8 @@
 
 	
 		<c:if test="${utilisateurActuel == null }">
-		<a href="seConnecter">S'inscrire-Se connecter</a>
+		<a href="seConnecter">Se connecter</a>
+			<a href="CreerUtilisateur">S'inscrire</a>
 		</c:if>
 	
 	<c:if test="${utilisateurActuel != null }">
