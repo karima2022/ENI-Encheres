@@ -11,6 +11,9 @@ import java.util.List;
 import fr.eni.encheres.BusinessException;
 import fr.eni.encheres.bo.Article;
 import fr.eni.encheres.bo.Retrait;
+import fr.eni.encheres.dal.ArticleDAO;
+import fr.eni.encheres.dal.CodesResultatDAL;
+import fr.eni.encheres.dal.ConnectionProvider;
 
 public class ArticleDAOJdbcImpl implements ArticleDAO {
 
