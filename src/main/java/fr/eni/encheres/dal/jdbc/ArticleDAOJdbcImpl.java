@@ -11,29 +11,32 @@ import java.util.List;
 import fr.eni.encheres.BusinessException;
 import fr.eni.encheres.bo.Article;
 import fr.eni.encheres.bo.Retrait;
-import fr.eni.encheres.dal.ArticleDAO;
-import fr.eni.encheres.dal.CodesResultatDAL;
-import fr.eni.encheres.dal.ConnectionProvider;
 
 public class ArticleDAOJdbcImpl implements ArticleDAO {
 
 	private static final String INSERT_ARTICLE = "INSERT INTO ARTICLES VALUES(?,?,?,?,?,?,?,?);";
 	private static final String INSERT_RETRAIT = "INSERT INTO RETRAITS VALUES(?,?,?,?);";
-	private static final String SELECT_ARTICLE_BY_ID = "SELECT * FROM ARTICLES WHERE noArticle=?;";
+	private static final String SELECT_ARTICLE_BY_ID = "SELECT a.*, u.pseudo FROM ARTICLES a JOIN UTILISATEURS u "
+															+ "ON u.idUtilisateur = a.idVendeur WHERE noArticle=?;";
 	private static final String SELECT_RETRAIT_BY_ID = "SELECT * FROM RETRAITS WHERE noArticle=?;";
 	private static final String UPDATE_ARTICLE = "UPDATE ARTICLES SET nom =?, descriptif=?, debutEnchere=?, finEnchere=?, "
 													+ "prix=?, categorie=? WHERE noArticle=?;";
 	private static final String UPDATE_RETRAIT = "UPDATE RETRAITS SET rue=?, codePostal=?, ville=? WHERE noArticle=?";
 	private static final String DELETE_ARTICLE = "DELETE FROM ARTICLES WHERE noArticle=?;";
-	private static final String SELECT_ENCHERES_OUVERTES = "SELECT * FROM ARTICLES a JOIN RETRAITS r ON r.noArticle = a.noArticle WHERE statut=2;";
+	private static final String SELECT_ENCHERES_OUVERTES = "SELECT a.*, r.*, u.pseudo FROM ARTICLES a JOIN RETRAITS r "
+																+ "ON r.noArticle = a.noArticle JOIN UTILISATEURS u "
+																+ "ON u.idUtilisateur = a.idVendeur WHERE a.statut=2;";
 	private static final String SELECT_MES_ENCHERES_EN_COURS = "";
 	private static final String SELECT_MES_ENCHERES_REMPORTEES = "";
-	private static final String SELECT_MES_VENTES_NON_COMMENCEES = "SELECT * FROM ARTICLES a JOIN RETRAITS r ON r.noArticle = a.noArticle "
-																		+ "WHERE idVendeur=? AND statut=1;";
-	private static final String SELECT_MES_VENTES_EN_COURS = "SELECT * FROM ARTICLES a JOIN RETRAITS r ON r.noArticle = a.noArticle "
-																	+ "WHERE idVendeur=? AND statut=2;";
-	private static final String SELECT_MES_VENTES_TERMINEES = "SELECT * FROM ARTICLES a JOIN RETRAITS r ON r.noArticle = a.noArticle "
-																	+ "WHERE idVendeur=? AND statut=3;";
+	private static final String SELECT_MES_VENTES_NON_COMMENCEES = "SELECT a.*, r.*, u.pseudo FROM ARTICLES a JOIN RETRAITS r "
+																		+ "ON r.noArticle = a.noArticle JOIN UTILISATEURS u "
+																		+ "ON u.idUtilisateur = a.idVendeur WHERE idVendeur=? AND statut=1;";
+	private static final String SELECT_MES_VENTES_EN_COURS = "SELECT a.*, r.*, u.pseudo FROM ARTICLES a JOIN RETRAITS r "
+																+ "ON r.noArticle = a.noArticle JOIN UTILISATEURS u "
+																+ "ON u.idUtilisateur = a.idVendeur WHERE idVendeur=? AND statut=2;";
+	private static final String SELECT_MES_VENTES_TERMINEES = "SELECT a.*, r.*, u.pseudo FROM ARTICLES a JOIN RETRAITS r "
+																+ "ON r.noArticle = a.noArticle JOIN UTILISATEURS u "
+																+ "ON u.idUtilisateur = a.idVendeur WHERE idVendeur=? AND statut=3;";
 	
 	
 	
@@ -122,6 +125,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 				article.setCategorie(rs.getInt("categorie"));
 				article.setIdVendeur(rs.getInt("idVendeur"));
 				article.setStatut(rs.getInt("statut"));
+				article.setPseudoVendeur(rs.getString("pseudo"));
 			}
 			
 			rs.close();
@@ -272,6 +276,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 				article.setCategorie(rs.getInt("categorie"));
 				article.setIdVendeur(rs.getInt("idVendeur"));
 				article.setStatut(rs.getInt("statut"));
+				article.setPseudoVendeur(rs.getString("pseudo"));
 				
 				retrait = new Retrait();
 				retrait.setNoArticle(rs.getInt("noArticle"));
@@ -348,6 +353,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 				article.setCategorie(rs.getInt("categorie"));
 				article.setIdVendeur(rs.getInt("idVendeur"));
 				article.setStatut(rs.getInt("statut"));
+				article.setPseudoVendeur(rs.getString("pseudo"));
 				
 				retrait = new Retrait();
 				retrait.setNoArticle(rs.getInt("noArticle"));
@@ -398,6 +404,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 				article.setCategorie(rs.getInt("categorie"));
 				article.setIdVendeur(rs.getInt("idVendeur"));
 				article.setStatut(rs.getInt("statut"));
+				article.setPseudoVendeur(rs.getString("pseudo"));
 				
 				retrait = new Retrait();
 				retrait.setNoArticle(rs.getInt("noArticle"));
@@ -448,6 +455,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 				article.setCategorie(rs.getInt("categorie"));
 				article.setIdVendeur(rs.getInt("idVendeur"));
 				article.setStatut(rs.getInt("statut"));
+				article.setPseudoVendeur(rs.getString("pseudo"));
 				
 				retrait = new Retrait();
 				retrait.setNoArticle(rs.getInt("noArticle"));
