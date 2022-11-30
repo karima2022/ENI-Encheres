@@ -14,6 +14,7 @@ public class Article {
 	private int idVendeur;
 	private int statut;
 	private Retrait retrait;
+	private String pseudoVendeur;
 	
 	
 	public int getNoArticle() {
@@ -96,6 +97,13 @@ public class Article {
 		this.retrait = retrait;
 	}
 	
+	public String getPseudoVendeur() {
+		return pseudoVendeur;
+	}
+	
+	public void setPseudoVendeur(String pseudo) {
+		this.pseudoVendeur = pseudo;
+	}
 	
 	
 	public Article() {
