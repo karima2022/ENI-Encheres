@@ -66,7 +66,8 @@ public class ServletSeConnecter extends HttpServlet {
 		else { request.getServletPath().equals("/deconnexion"); 
 		
 			request.getSession().invalidate();
-			request.getRequestDispatcher("WEB-INF/Accueil.jsp").forward(request, response);
+
+			response.sendRedirect("accueil");
 		
 		}
 	}

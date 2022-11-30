@@ -19,9 +19,9 @@
 	
 	<c:if test="${utilisateurActuel != null }">
 		<a href="">Enchères</a>
-		<a href="">Vendre un article</a>
+		<a href="nouvelle_vente">Vendre un article</a>
 		<a href="">Mon profil</a>
-		<a href="">Déconnexion</a>
+		<a href="${pageContext.request.contextPath }/deconnexion" title="deconnexion">Déconnexion</a>
 </c:if>
 
 	<h1>Liste des enchères</h1>
@@ -86,8 +86,8 @@
 	<li>
 	<c:choose >
 		<c:when test="${utilisateurActuel != null }">
-		vendeur:<a href="${pseudo}"> ${pseudo} </a></c:when> 
-		<c:otherwise>Vendeur : ${pseudo} </c:otherwise>
+		vendeur:<a href="${pseudo}"> ${a.getPseudoVendeur()} </a></c:when> 
+		<c:otherwise>Vendeur : ${a.getPseudoVendeur()} </c:otherwise>
 	</c:choose>
 </li>
 </ul>
