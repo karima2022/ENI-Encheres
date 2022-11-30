@@ -50,7 +50,7 @@ public class ServletNouvelleVente extends HttpServlet {
 //			chargerArticle(request, articleManager);
 		}
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/pages/nouvelle_vente.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/nouvelle_vente.jsp");
 		rd.forward(request, response);
 		
 	}
@@ -68,7 +68,7 @@ public class ServletNouvelleVente extends HttpServlet {
 			ajouterNouvelleVente(request, response);
 		}
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/accueil.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Accueil.jsp");
 		rd.forward(request, response);
 		
 	}
