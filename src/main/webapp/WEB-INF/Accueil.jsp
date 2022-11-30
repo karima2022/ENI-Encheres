@@ -44,28 +44,28 @@
 
 <c:if test="${utilisateurActuel != null }">
 	<a>
-		<input type ="radio" name="achatVente">Achats
+		<input type ="radio" name="achatVente" id="achats-RB" checked>Achats
 	<div>
-		<input type="checkbox">enchères ouvertes
+		<input type="checkbox" name="achat" checked>enchères ouvertes
 	</div>
 	<div>
-		<input type="checkbox">mes enchères en cours
+		<input type="checkbox" name="achat">mes enchères en cours
 	</div>
 	<div>
-		<input type="checkbox">mes enchères remportées
+		<input type="checkbox" name="achat">mes enchères remportées
 	</div>
 </a>
 	
 	<a>
-		<input type="radio" name="achatVente">Mes ventes
+		<input type="radio" name="achatVente" id="ventes-RB">Mes ventes
 	<div>
-		<input type="checkbox">mes ventes en cours
+		<input type="checkbox" name="vente" disabled>mes ventes en cours
 	</div>
 	<div>
-		<input type="checkbox">ventes non débutées
+		<input type="checkbox" name="vente" disabled>ventes non débutées
 	</div>
 	<div>
-		<input type="checkbox">ventes terminées
+		<input type="checkbox" name="vente" disabled>ventes terminées
 	</div>
 </a>
 </c:if>
@@ -103,7 +103,32 @@
 
 
 
-
+<script>
+	const achatsRB = document.getElementById("achats-RB");
+	const ventesRB = document.getElementById("ventes-RB");
+	const encheres = document.getElementsByName("achat");
+	const ventes = document.getElementsByName("vente");
+	
+	achatsRB.addEventListener("change", (event) => {
+	  ventesRB.disabled = !event.target.checked;
+	  ventes.forEach(element => {
+	    element.checked = false;
+	    element.disabled = true;
+	  });
+	  encheres[0].checked = true;
+	  encheres.forEach(element => element.disabled = false);
+	}, false);
+	
+	ventesRB.addEventListener("change", (event) => {
+	  achatsRB.disabled = !event.target.checked;
+	  encheres.forEach(element => {
+	    element.checked = false;
+	    element.disabled = true;
+	  });
+	  ventes[0].checked = true;
+	  ventes.forEach(element => element.disabled = false);
+	}, false);
+</script>
 
 </body>
 </html>

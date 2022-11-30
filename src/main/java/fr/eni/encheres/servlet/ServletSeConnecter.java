@@ -79,10 +79,11 @@ public class ServletSeConnecter extends HttpServlet {
 			user=UtilisateurManager.getInstance().seConnecter(identifiant, mdp);
 			
 			request.setAttribute("login", cookie.getValue());
-			request.getRequestDispatcher("/WEB-INF/Accueil.jsp").forward(request, response);
+//			request.getRequestDispatcher("/WEB-INF/Accueil.jsp").forward(request, response);
 			session = request.getSession();
 			session.setAttribute("utilisateurActuel", user);
-			response.sendRedirect("/Accueil");
+//			response.sendRedirect("/Accueil");
+			request.getRequestDispatcher("/WEB-INF/Accueil.jsp").forward(request, response);
 			
 		} catch (BusinessException e) {
 			
