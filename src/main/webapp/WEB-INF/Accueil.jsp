@@ -68,12 +68,20 @@
 	</div>
 </a>
 </c:if>
-
+<section>
+<c:forEach var="a" items="${ListeArticle}"> 
+<article>
 <ul >
+<c:if test="${ListeArticle==null}">
+<p>liste non vide</p>
+</c:if>
+<li><c:choose >
+		<c:when test="${utilisateurActuel != null }">
+		Article:<a href="${a.getNom()}"><c:out value= "${a.getNom()}"/> </a></c:when> 
+		<c:otherwise>Article : ${a.getNom()} </c:otherwise>
+	</c:choose>
+	<li>prix :<c:out value="${a.getPrix() }"/> points</li>
 
-<li><a href=""><c:out value="${nomArticle}"/></a></li>
-	<li>prix :<c:out value="${prix }"/> points</li>
-	<li>Fin de l'enchere : <fmt:formatDate value="${finEnchere}" pattern="dd/MM/yyyy hh:mm"/></li>
 	<li>
 	<c:choose >
 		<c:when test="${utilisateurActuel != null }">
@@ -82,6 +90,12 @@
 	</c:choose>
 </li>
 </ul>
+</article>
+	
+
+</c:forEach>
+</section>
+
 
 
 
