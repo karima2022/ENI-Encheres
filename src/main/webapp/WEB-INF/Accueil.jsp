@@ -85,7 +85,7 @@
 <ul >
 <li><c:choose >
 		<c:when test="${utilisateurActuel != null }">
-		Article:<a href="${a.getNom()}"><c:out value= "${a.getNom()}"/> </a></c:when> 
+		Article:<a href="${pageContext.request.contextPath }/modifier?idArticle=${a.getNoArticle()}"><c:out value= "${a.getNom()}"/> </a></c:when> 
 		<c:otherwise>Article : ${a.getNom()} </c:otherwise>
 	</c:choose>
 	<li>prix :<c:out value="${a.getPrix() }"/> points</li>
