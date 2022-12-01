@@ -59,7 +59,7 @@ public class ServletCreerUtilisateur extends HttpServlet {
 			try {
 				u = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse);
 
-				UtilisateurManager.getInstance().modifierUtilisateur(pseudo);
+				UtilisateurManager.getInstance().modifierUtilisateur(u);
 				
 			} catch (BusinessException e) {
 				

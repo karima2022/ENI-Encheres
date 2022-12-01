@@ -122,13 +122,13 @@ public class UtilisateurManager {
 
 	/////////////////////////////////// MODIFIER UTILISATEUR /////////////////////////////////// 
 	
-	public void modifierUtilisateur(String pseudo) throws BusinessException {
-		Utilisateur u = null ;
+	public void modifierUtilisateur(Utilisateur u ) throws BusinessException {
+		
 		BusinessException businessException = new BusinessException();
 		this.emailValidator(u.getEmail(), businessException);
 		this.verificationPseudo(u.getPseudo(), businessException);
 		if (!businessException.hasErreurs()) {
-			utilisateurDAO.updateUtilisateur(pseudo);
+			utilisateurDAO.updateUtilisateur(u.getPseudo());
 		} else {
 			throw businessException;
 		}
@@ -138,13 +138,13 @@ public class UtilisateurManager {
 
 	public void supprimerUtilisateur(String pseudo) throws BusinessException {
 		//Utilisateur u = null;
-		BusinessException businessException = new BusinessException();
-		{
+		//BusinessException businessException = new BusinessException();
+		//{
 			utilisateurDAO.deleteUtilisateur(pseudo);
 		}
-		{
-			throw businessException;
-		}
-	}
+		//{
+		//	throw businessException;
+		//}
+	//}
 
 }

@@ -84,8 +84,6 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		}
 	}
 
-
-
 /////////////////////////////////////////////UPDATE UTILISATEUR //////////////////////////////////////////////////////////////////
 	private static final String UPDATE_UTILISATEUR = "UPDATE UTILISATEURS SET  pseudo=?,  nom=?,  prenom=?,  email=?,  telephone=?,  rue=?, codePostal=?,ville=?, motDePasse=?, credit=?, administrateur=? WHERE pseudo=?;";
 
@@ -94,10 +92,10 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		Utilisateur u = null;
 		try {
 			Connection cnx = ConnectionProvider.getConnection();
-			PreparedStatement pstmt = cnx.prepareStatement(UPDATE_UTILISATEUR, PreparedStatement.RETURN_GENERATED_KEYS);
+			PreparedStatement pstmt = cnx.prepareStatement(UPDATE_UTILISATEUR);
 			pstmt.setString(1, pseudo);
 			ResultSet res = pstmt.executeQuery();
-		 {
+		//	{
 				u = new Utilisateur();
 				u.setEmail(res.getString("email"));
 				u.setPseudo(res.getString("pseudo"));
@@ -111,11 +109,11 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 				u.setTelephone(res.getString("telephone"));
 				u.setVille(res.getString("ville"));
 				pstmt.executeUpdate();
-				ResultSet rs = pstmt.getGeneratedKeys();
-				if (rs.next()) {
-					u.setNoUtilisateur(rs.getInt(1));
-				}
-			}
+				//ResultSet rs = pstmt.getGeneratedKeys();
+				//if (rs.next()) {
+				//	u.setNoUtilisateur(rs.getInt(1));
+			//	}
+		//	}
 		} catch (SQLException e) {
 
 			BusinessException businessException = new BusinessException();
@@ -125,40 +123,39 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		}
 	}
 
-	////////////////////////// DELETE UTILISATEUR BY PSEUDO ////////////////////////// 
-	
+	////////////////////////// DELETE UTILISATEUR BY PSEUDO
+	////////////////////////// //////////////////////////
 
 	private static final String DELETE_UTILISATEUR = "DELETE FROM UTILISATEURS WHERE pseudo=? ;";
 
 	@Override
 	public void deleteUtilisateur(String pseudo) throws BusinessException {
 
-		Utilisateur utilisateur = null;
+		//Utilisateur utilisateur = null;
 		try {
 			Connection cnx = ConnectionProvider.getConnection();
-			PreparedStatement pstmt = cnx.prepareStatement(DELETE_UTILISATEUR, PreparedStatement.RETURN_GENERATED_KEYS);
+			PreparedStatement pstmt = cnx.prepareStatement(DELETE_UTILISATEUR);
 			pstmt.setString(1, pseudo);
-			ResultSet res = pstmt.executeQuery();
-			{
+			//ResultSet res = pstmt.executeQuery();
+			
 
-				pstmt.setString(1, utilisateur.getPseudo());
-				pstmt.setString(2, utilisateur.getNom());
-				pstmt.setString(3, utilisateur.getPrenom());
-				pstmt.setString(4, utilisateur.getEmail());
-				pstmt.setString(5, utilisateur.getTelephone());
-				pstmt.setString(6, utilisateur.getRue());
-				pstmt.setString(7, utilisateur.getCodePostal());
-				pstmt.setString(8, utilisateur.getVille());
-				pstmt.setString(9, utilisateur.getMotDePasse());
-				pstmt.setInt(10, utilisateur.getCredit());
-				pstmt.setInt(11, utilisateur.getAdministrateur());
+//				pstmt.setString(1, utilisateur.getPseudo());
+//				pstmt.setString(2, utilisateur.getNom());
+//				pstmt.setString(3, utilisateur.getPrenom());
+//				pstmt.setString(4, utilisateur.getEmail());
+//				pstmt.setString(5, utilisateur.getTelephone());
+//				pstmt.setString(6, utilisateur.getRue());
+//				pstmt.setString(7, utilisateur.getCodePostal());
+//				pstmt.setString(8, utilisateur.getVille());
+//				pstmt.setString(9, utilisateur.getMotDePasse());
+//				pstmt.setInt(10, utilisateur.getCredit());
+//				pstmt.setInt(11, utilisateur.getAdministrateur());
 
 				pstmt.executeUpdate();
-				ResultSet rs = pstmt.getGeneratedKeys();
-				if (rs.next()) {
-					utilisateur.setNoUtilisateur(rs.getInt(1));
-				}
-			}
+				
+
+			
+
 		} catch (SQLException e) {
 
 			BusinessException businessException = new BusinessException();
