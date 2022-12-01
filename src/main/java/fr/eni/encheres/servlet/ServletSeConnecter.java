@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 import javax.websocket.Session;
 
 import fr.eni.encheres.BusinessException;
+import fr.eni.encheres.bll.ArticleManager;
 import fr.eni.encheres.bll.UtilisateurManager;
 import fr.eni.encheres.bo.Article;
 import fr.eni.encheres.bo.Utilisateur;
@@ -96,7 +97,7 @@ public class ServletSeConnecter extends HttpServlet {
 		try {
 
 			user = UtilisateurManager.getInstance().seConnecter(identifiant, mdp);
-			article = UtilisateurManager.getInstance().afficher();
+			//article = ArticleManager.afficher();
 
 			request.setAttribute("login", cookie.getValue());
 
