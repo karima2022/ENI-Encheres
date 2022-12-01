@@ -90,7 +90,6 @@ public class ArticleManager {
 		
 		this.validerNomArticle(nom, businessException);
 		this.validerDescriptionArticle(description, businessException);
-		this.validerDateDebutEnchere(debutEnchere, businessException);
 		this.validerDateFinEnchere(debutEnchere, finEnchere, businessException);
 		this.validerRueRetrait(rue, businessException);
 		this.validerCPRetrait(codePostal, businessException);
