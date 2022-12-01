@@ -11,9 +11,6 @@ import java.util.List;
 import fr.eni.encheres.BusinessException;
 import fr.eni.encheres.bo.Article;
 import fr.eni.encheres.bo.Retrait;
-import fr.eni.encheres.dal.ArticleDAO;
-import fr.eni.encheres.dal.CodesResultatDAL;
-import fr.eni.encheres.dal.ConnectionProvider;
 
 public class ArticleDAOJdbcImpl implements ArticleDAO {
 
@@ -29,8 +26,19 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 	private static final String SELECT_ENCHERES_OUVERTES = "SELECT a.*, r.*, u.pseudo FROM ARTICLES a JOIN RETRAITS r "
 																+ "ON r.noArticle = a.noArticle JOIN UTILISATEURS u "
 																+ "ON u.idUtilisateur = a.idVendeur WHERE a.statut=2;";
-	private static final String SELECT_MES_ENCHERES_EN_COURS = "";
-	private static final String SELECT_MES_ENCHERES_REMPORTEES = "";
+	private static final String SELECT_MES_ENCHERES_EN_COURS = "SELECT a.*, u.pseudo, e.* FROM ARTICLES a JOIN ENCHERES e ON e.noArticle = a.noArticle "
+																	+ "JOIN UTILISATEURS u ON u.idUtilisateur = a.idVendeur "
+																	+ "WHERE e.idEnchere IN(SELECT requete.idEnchere FROM ("
+																	+ "SELECT MAX(idEnchere) AS idEnchere, MAX(montantEnchere) AS montant "
+																	+ "FROM ENCHERES WHERE idAcheteur=? GROUP BY noArticle) AS requete);";
+	private static final String SELECT_MES_ENCHERES_REMPORTEES = "SELECT a.*, u.pseudo, e.* FROM ARTICLES a JOIN ENCHERES e ON e.noArticle = a.noArticle "
+																	+ "JOIN UTILISATEURS u ON u.idUtilisateur = a.idVendeur "
+																	+ "WHERE e.idAcheteur=? AND e.idEnchere IN("
+																	+ "SELECT requete.idEnchere FROM"
+																	+ "(SELECT MAX(e.idEnchere) AS idEnchere, MAX(e.montantEnchere) AS montant"
+																	+ "	FROM ENCHERES e JOIN ARTICLES a ON a.noArticle = e.noArticle"
+																	+ "	WHERE a.statut = 3"
+																	+ "	GROUP BY e.noArticle) AS requete);";
 	private static final String SELECT_MES_VENTES_NON_COMMENCEES = "SELECT a.*, r.*, u.pseudo FROM ARTICLES a JOIN RETRAITS r "
 																		+ "ON r.noArticle = a.noArticle JOIN UTILISATEURS u "
 																		+ "ON u.idUtilisateur = a.idVendeur WHERE idVendeur=? AND statut=1;";
@@ -310,8 +318,46 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 	 */
 	@Override
 	public List<Article> selectMesEncheresEnCours(int id) throws BusinessException {
-		// TODO Auto-generated method stub
-		return null;
+		List<Article> articles = new ArrayList<Article>();
+		Article article = null;
+		Retrait retrait = null;
+		
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement pstmt = cnx.prepareStatement(SELECT_MES_ENCHERES_EN_COURS);
+			pstmt.setInt(1, id);
+			ResultSet rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				article = new Article();
+				article.setNoArticle(rs.getInt("noArticle"));
+				article.setNom(rs.getString("nom"));
+				article.setDescription(rs.getString("descriptif"));
+				article.setDebutEnchere(rs.getTimestamp("debutEnchere").toLocalDateTime());
+				article.setFinEnchere(rs.getTimestamp("finEnchere").toLocalDateTime());
+				article.setPrix(rs.getInt("prix"));
+				article.setCategorie(rs.getInt("categorie"));
+				article.setIdVendeur(rs.getInt("idVendeur"));
+				article.setStatut(rs.getInt("statut"));
+				article.setPseudoVendeur(rs.getString("pseudo"));
+				
+				retrait = new Retrait();
+				retrait.setNoArticle(rs.getInt("noArticle"));
+				retrait.setRue(rs.getString("rue"));
+				retrait.setCodePostal(rs.getString("codePostal"));
+				retrait.setVille(rs.getString("ville"));
+				
+				article.setRetrait(retrait);
+				
+				articles.add(article);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.LECTURE_ARTICLES_ECHEC);
+			throw businessException;
+		}
+		
+		return articles;
 	}
 	
 	
@@ -323,8 +369,46 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 	 */
 	@Override
 	public List<Article> selectMesEncheresRemportees(int id) throws BusinessException {
-		// TODO Auto-generated method stub
-		return null;
+		List<Article> articles = new ArrayList<Article>();
+		Article article = null;
+		Retrait retrait = null;
+		
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement pstmt = cnx.prepareStatement(SELECT_MES_ENCHERES_REMPORTEES);
+			pstmt.setInt(1, id);
+			ResultSet rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				article = new Article();
+				article.setNoArticle(rs.getInt("noArticle"));
+				article.setNom(rs.getString("nom"));
+				article.setDescription(rs.getString("descriptif"));
+				article.setDebutEnchere(rs.getTimestamp("debutEnchere").toLocalDateTime());
+				article.setFinEnchere(rs.getTimestamp("finEnchere").toLocalDateTime());
+				article.setPrix(rs.getInt("prix"));
+				article.setCategorie(rs.getInt("categorie"));
+				article.setIdVendeur(rs.getInt("idVendeur"));
+				article.setStatut(rs.getInt("statut"));
+				article.setPseudoVendeur(rs.getString("pseudo"));
+				
+				retrait = new Retrait();
+				retrait.setNoArticle(rs.getInt("noArticle"));
+				retrait.setRue(rs.getString("rue"));
+				retrait.setCodePostal(rs.getString("codePostal"));
+				retrait.setVille(rs.getString("ville"));
+				
+				article.setRetrait(retrait);
+				
+				articles.add(article);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.LECTURE_ARTICLES_ECHEC);
+			throw businessException;
+		}
+		
+		return articles;
 	}
 	
 	
