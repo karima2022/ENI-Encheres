@@ -11,10 +11,11 @@ public static final int IDENTIFIANT_KO = 20000;
 
 public static final int EMAIL_INVALID = 20001;
 
-
-
 public static final int PSEUDO_INVALID = 20002;
 
+public static final int EMAIL_KO = 20003;
+
+public static final int PSEUDO_KO = 20004;
 
 
 
