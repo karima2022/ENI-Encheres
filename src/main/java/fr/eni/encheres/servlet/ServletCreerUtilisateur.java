@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import fr.eni.encheres.BusinessException;
 import fr.eni.encheres.bll.UtilisateurManager;
@@ -48,10 +49,17 @@ public class ServletCreerUtilisateur extends HttpServlet {
         String ville = request.getParameter("ville");
         String motDePasse = request.getParameter("motDePasse");
         Utilisateur u = null;
+        
+        HttpSession session;
+        
         try {
             u = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse);
             UtilisateurManager.getInstance().ajouterUtilisateur(u);
-            request.getRequestDispatcher("/WEB-INF/Accueil.jsp").forward(request, response);
+            
+            session = request.getSession();
+            session.setAttribute("utilisateurActuel", u);
+            response.sendRedirect("accueil");
+            
         } catch (BusinessException businessException) {
             request.setAttribute("listeCodesErreur", businessException.getListeCodesErreur());
             request.getRequestDispatcher("/WEB-INF/CreerUtilisateur.jsp").forward(request, response);
