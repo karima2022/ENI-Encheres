@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Accueil</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
 	<%@ include file="Entete.html"%>
@@ -20,7 +21,7 @@
 	<c:if test="${utilisateurActuel != null }">
 		<a href="">Enchères</a>
 		<a href="nouvelle_vente">Vendre un article</a>
-		<a href="">Mon profil</a>
+		<a href="AfficherUtilisateurServlet?pseudo=${utilisateurActuel.getPseudo()}">Mon profil</a>
 		<a href="${pageContext.request.contextPath }/deconnexion" title="deconnexion">Déconnexion</a>
 </c:if>
 
@@ -71,35 +72,46 @@
 </c:if>
 <section>
 <c:forEach var="a" items="${ListeArticle}"> 
-<article>
+
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+
+    <p class="card-text">
+ <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXerdzqdNqu4QNvGsjqgNrbfHNMdEfaAMSFA&usqp=CAU"
+				name="image"
+				width="100"
+				height="100"
+				style="border: 1px solid black" class="card-img-top" alt="image">
 <ul >
-<c:if test="${ListeArticle==null}">
-<p>liste non vide</p>
-</c:if>
-					<li><c:choose>
-							<c:when test="${utilisateurActuel != null }">
-		Article:<a href="${a.getNom()}"><c:out value="${a.getNom()}" /> </a>
-							</c:when>
-							<c:otherwise>Article : ${a.getNom()} </c:otherwise>
-						</c:choose>
-					<li>prix :<c:out value="${a.getPrix() }" /> points
-					</li>
-					<li>Fin de l'enchere : <fmt:parseDate
-							value="${a.getFinEnchere()}" pattern="yyyy-MM-dd'T'HH:mm"
-							var="parsedDateTime" type="both" /> <fmt:formatDate
-							pattern="dd.MM.yyyy HH:mm" value="${parsedDateTime}" /></li>
-					<li><c:choose>
-							<c:when test="${utilisateurActuel != null }">
-		vendeur:<a href="${pseudo}"> ${a.getPseudoVendeur()} </a>
-							</c:when>
-							<c:otherwise>Vendeur : ${a.getPseudoVendeur()} </c:otherwise>
-						</c:choose></li>
-				</ul>
-</article>
+<li><c:choose >
+		<c:when test="${utilisateurActuel != null }">
+		Article:<a href="${a.getNom()}"><c:out value= "${a.getNom()}"/> </a></c:when> 
+		<c:otherwise>Article : ${a.getNom()} </c:otherwise>
+	</c:choose>
+	<li>prix :<c:out value="${a.getPrix() }"/> points</li>
+
+	<li>
+	<c:choose >
+		<c:when test="${utilisateurActuel != null }">
+		vendeur:<a href="AfficherUtilisateurServlet?pseudo=${a.getPseudoVendeur()}"> ${a.getPseudoVendeur()} </a></c:when> 
+		<c:otherwise>Vendeur : ${a.getPseudoVendeur()} </c:otherwise>
+	</c:choose>
+</li>
+</ul>
+
+  </div>
+</div>
+
 	
 
 </c:forEach>
 </section>
+
+
+
+
+
+
 
 <script>
 	const achatsRB = document.getElementById("achats-RB");

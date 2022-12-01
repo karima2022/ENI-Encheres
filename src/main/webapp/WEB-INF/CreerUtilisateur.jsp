@@ -103,7 +103,7 @@
 			<input type="password" id="confirmationMdp" name="confirmationMdp">
 			<br>
 			<label>Credit :</label>
-			<c:out value="${utilisateurActuel.credit}" />
+			<c:out value="${utilisateurActuel.credit}" /><br>
 		</c:if>
 
 
