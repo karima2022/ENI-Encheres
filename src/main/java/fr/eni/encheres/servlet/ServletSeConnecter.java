@@ -107,11 +107,11 @@ public class ServletSeConnecter extends HttpServlet {
 			response.sendRedirect("accueil");
 		} catch (BusinessException e) {
 
-			request.setAttribute("ListeCodesErreur", e.getListeCodesErreur());
+			request.setAttribute("listeCodesErreur", e.getListeCodesErreur());
 
 			e.printStackTrace();
 
-			request.getRequestDispatcher("/WEB-INF/seConnecter.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/seconnecter.jsp").forward(request, response);
 		}
 		
 	}

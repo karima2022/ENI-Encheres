@@ -26,25 +26,27 @@ public class UtilisateurManager {
 		}
 		return instance;
 	}
-/////////////////////////AJOUTER UTILISATEUR////////////////////////////////////////////
-public void ajouterUtilisateur(Utilisateur u) throws BusinessException {
+////////////////////////////AJOUTER UTILISATEUR////////////////////////////////////////////   
+	public void ajouterUtilisateur(Utilisateur u) throws BusinessException {
 BusinessException businessException = new BusinessException();
 this.emailValidator(u.getEmail(), businessException);
 this.verificationPseudo(u.getPseudo(), businessException);
+this.uniciteMail(u.getEmail(), businessException);
+this.unicitePseudo(u.getPseudo(), businessException);
 if (!businessException.hasErreurs()) {
 utilisateurDAO.insert(u);
 } else {
 throw businessException;
 }
 }
-//VERIF presence @ dans le mail 
-public void emailValidator(String email, BusinessException businessException) {
+//VERIF presence @ dans le mail   
+	public void emailValidator(String email, BusinessException businessException) {
 if (!email.contains("@")) {
 businessException.ajouterErreur(CodesResultatBLL.EMAIL_INVALID);
 }
 }
-//VERIF si pseudo alpanumerique
-public void verificationPseudo(String pseudo, BusinessException businessException) {
+//VERIF si pseudo alpanumerique   
+	public void verificationPseudo(String pseudo, BusinessException businessException) {
 char mdp;
 boolean pseudoOk = false;
 for (int i = 0; i < pseudo.length(); i++) {
@@ -60,6 +62,24 @@ break;
 }
 if (!pseudoOk) {
 businessException.ajouterErreur(CodesResultatBLL.PSEUDO_INVALID);
+}
+}
+//VERIF si email unique     
+	public void uniciteMail(String email, BusinessException businessException) throws BusinessException {
+Utilisateur u = null;
+System.out.println(email);
+u = utilisateurDAO.getUtilisateurByMail(email);
+if ( u!=null) {
+businessException.ajouterErreur(CodesResultatBLL.EMAIL_KO);
+}
+}
+//VERIF si pseudo unique   
+	public void unicitePseudo(String pseudo, BusinessException businessException) throws BusinessException {
+Utilisateur u = null;
+System.out.println(pseudo);
+u = utilisateurDAO.getUtilisateurByPseudo(pseudo);
+if ( u!=null) {
+businessException.ajouterErreur(CodesResultatBLL.PSEUDO_KO);
 }
 }
 	
@@ -83,9 +103,7 @@ businessException.ajouterErreur(CodesResultatBLL.PSEUDO_INVALID);
 		return null;
 	}
 	public Article afficher() throws BusinessException{
-//		articleDAO = DAOFactory.getArticleDAO();
-//		List<Article> articles = articleDAO.findAll();
-		//return articles.get(0);
+
 		return null;
 	}
 	
