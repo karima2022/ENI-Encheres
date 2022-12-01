@@ -89,7 +89,9 @@
 		<c:otherwise>Article : ${a.getNom()} </c:otherwise>
 	</c:choose>
 	<li>prix :<c:out value="${a.getPrix() }"/> points</li>
-
+<li>Fin de l'enchere : <fmt:parseDate value="${a.getFinEnchere()}"
+               pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both" /> 
+                 <fmt:formatDate pattern="dd.MM.yyyy HH:mm" value="${parsedDateTime}" /></li>
 	<li>
 	<c:choose >
 		<c:when test="${utilisateurActuel != null }">

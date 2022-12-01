@@ -32,7 +32,7 @@
 	
 	<a href=" ModifMot de passe   ">Mot de passe oublié</a>
 	
-	<p><a href="servletCreerUtilisateur"><input type="button" value="Creer un compte"></a></p>
+	<p><a href="CreerUtilisateur"><input type="button" value="Creer un compte"></a></p>
 	
 	</form>
 </body>
