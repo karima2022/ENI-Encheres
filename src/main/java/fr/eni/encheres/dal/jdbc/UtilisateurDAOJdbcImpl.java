@@ -188,10 +188,4 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		return null;
 	}
 
-//	@Override
-//	public void modifierProfil(Utilisateur utilisateur) throws BusinessException {
-//		// TODO Auto-generated method stub
-//		
-//	}
-
 }

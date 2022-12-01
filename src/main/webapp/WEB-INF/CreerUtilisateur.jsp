@@ -107,18 +107,6 @@
 		</c:if>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 		<c:choose>
 			<c:when test="${utilisateurActuel == null }">
 				<button type="submit" name="profil" value="creer">Créer</button>
