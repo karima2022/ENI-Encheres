@@ -85,7 +85,8 @@ public class ServletCreerUtilisateur extends HttpServlet {
 		
 		try {
 			UtilisateurManager.getInstance().supprimerUtilisateur(pseudo);
-			request.getRequestDispatcher("/WEB-INF/accueil.jsp").forward(request, response);
+		//	request.getRequestDispatcher("/WEB-INF/accueil.jsp").forward(request, response);
+			response.sendRedirect("accueil");
 		} catch (BusinessException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
