@@ -10,5 +10,9 @@ public interface UtilisateurDAO {
 	public  Utilisateur getUtilisateurByMail(String mail) throws BusinessException;
 
 	public void insert(Utilisateur utilisateur) throws  BusinessException;
-	public void modifierProfil (Utilisateur utilisateur)throws  BusinessException;
+	public void updateUtilisateur(String pseudo)throws  BusinessException;
+	
+	
+	public Utilisateur selectByPseudo(String pseudo) throws BusinessException;
+	public void deleteUtilisateur(String pseudo) throws BusinessException;
 }

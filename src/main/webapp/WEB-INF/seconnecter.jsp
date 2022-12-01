@@ -11,8 +11,7 @@
 </head>
 <body>
 <%@ include file="Entete.html" %>
-<%-- <c:out value="${login}"></c:out> --%>
-<%-- <%String login=(String)request.getAttribute("login"); %> --%>
+
 	<form method="POST">
 		<c:if test="${!empty listeCodesErreur}">
 			  <strong>Erreur!</strong>
@@ -31,9 +30,9 @@
 	
 	<p>se souvenir de moi<input type="checkbox" name="souvenir" id="souvenir"  value="true" checked="checked"></p>
 	
-<!-- 	<a href=" ModifMot de passe   ">Mot de passe oublié</a> -->
+	<a href=" ModifMot de passe   ">Mot de passe oublié</a>
 	
-	
+	<p><a href="servletCreerUtilisateur"><input type="button" value="Creer un compte"></a></p>
 	
 	</form>
 </body>
