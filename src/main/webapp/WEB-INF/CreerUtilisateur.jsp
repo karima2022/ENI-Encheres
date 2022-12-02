@@ -10,9 +10,8 @@
 <title>Profil</title>
 </head>
 <body>
-	<header>
-		<h1>Eni-Encheres</h1>
-	</header>
+	<%@ include file="Entete.html" %>
+	
 	<form method="post">
 		<c:if test="${!empty listeCodesErreur}">
 			<div class="alert alert-danger" role="alert">
