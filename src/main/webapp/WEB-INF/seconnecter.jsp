@@ -8,6 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Se connecter</title>
+<link rel="stylesheet" href="CSS/style.css">
 </head>
 <body>
 <%@ include file="Entete.html" %>
